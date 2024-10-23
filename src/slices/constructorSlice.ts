@@ -49,4 +49,4 @@ const constructorSlice = createSlice({
 
 export const { addIngredient, removeIngredient, moveUp, moveDown } =
   constructorSlice.actions;
-export default constructorSlice.reducer;
+export default constructorSlice;

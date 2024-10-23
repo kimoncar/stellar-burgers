@@ -41,4 +41,4 @@ const ingredientsSlice = createSlice({
   }
 });
 
-export default ingredientsSlice.reducer;
+export default ingredientsSlice;
