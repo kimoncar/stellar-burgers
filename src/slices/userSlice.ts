@@ -28,7 +28,7 @@ const initialState: IUserState = {
 
 export const registerUserThunk = createAsyncThunk(
   'user/register',
-  async (data: TRegisterData) => await registerUserApi(data)
+  (data: TRegisterData) => registerUserApi(data)
 );
 
 export const loginUserThunk = createAsyncThunk(
@@ -90,7 +90,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error as string;
+        state.error = action.error.message as string;
       })
       .addCase(loginUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
