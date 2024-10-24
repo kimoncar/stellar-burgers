@@ -3,7 +3,7 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
 import {
-  createOrder,
+  createOrderThunk,
   nulledOrderModalData
 } from '../../slices/constructorSlice';
 
@@ -26,7 +26,7 @@ export const BurgerConstructor: FC = () => {
       constructorItems.bun._id
     ];
 
-    dispatch(createOrder(dataOrder));
+    dispatch(createOrderThunk(dataOrder));
   };
 
   const closeOrderModal = () => {

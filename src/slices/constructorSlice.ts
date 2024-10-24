@@ -20,8 +20,9 @@ const initialState: IConstructorState = {
   error: null
 };
 
-export const createOrder = createAsyncThunk('order/create', (data: string[]) =>
-  orderBurgerApi(data)
+export const createOrderThunk = createAsyncThunk(
+  'order/create',
+  (data: string[]) => orderBurgerApi(data)
 );
 
 const constructorSlice = createSlice({
@@ -63,17 +64,17 @@ const constructorSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createOrder.pending, (state) => {
+      .addCase(createOrderThunk.pending, (state) => {
         state.orderRequest = true;
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(createOrder.rejected, (state, action) => {
+      .addCase(createOrderThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isLoading = false;
         state.error = action.error as string;
       })
-      .addCase(createOrder.fulfilled, (state, action) => {
+      .addCase(createOrderThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.orderRequest = false;
