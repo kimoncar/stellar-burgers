@@ -1,15 +1,28 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
-import { TConstructorIngredient } from '@utils-types';
+import { orderBurgerApi } from '@api';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
+import { TConstructorIngredient, TOrder } from '@utils-types';
 
 export interface IConstructorState {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
+  isLoading: boolean;
+  orderRequest: boolean;
+  orderModalData: TOrder | null;
+  error: string | null;
 }
 
 const initialState: IConstructorState = {
   bun: null,
-  ingredients: []
+  ingredients: [],
+  isLoading: false,
+  orderRequest: false,
+  orderModalData: null,
+  error: null
 };
+
+export const createOrder = createAsyncThunk('order/create', (data: string[]) =>
+  orderBurgerApi(data)
+);
 
 const constructorSlice = createSlice({
   name: 'constructorBurger',
@@ -43,10 +56,39 @@ const constructorSlice = createSlice({
         state.ingredients[index + 1],
         state.ingredients[index]
       ];
+    },
+    nulledOrderModalData: (state) => {
+      state.orderModalData = null;
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createOrder.pending, (state) => {
+        state.orderRequest = true;
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isLoading = false;
+        state.error = action.error as string;
+      })
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.orderRequest = false;
+        state.orderModalData = action.payload.order;
+        state.bun = null;
+        state.ingredients = [];
+      });
   }
 });
 
-export const { addIngredient, removeIngredient, moveUp, moveDown } =
-  constructorSlice.actions;
+export const {
+  addIngredient,
+  removeIngredient,
+  moveUp,
+  moveDown,
+  nulledOrderModalData
+} = constructorSlice.actions;
 export default constructorSlice;
