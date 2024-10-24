@@ -18,6 +18,7 @@ import { ProtectedRoute } from '../protected-route';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredientsThunk } from '../../slices/ingredientsSlice';
+import { getUserThunk } from '../../slices/userSlice';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,8 +31,9 @@ const App = () => {
   };
 
   useEffect(() => {
+    //dispatch(getUserThunk());
     dispatch(getIngredientsThunk());
-  });
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>
@@ -43,7 +45,7 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute forAuthorized>
               <Login />
             </ProtectedRoute>
           }
@@ -51,7 +53,7 @@ const App = () => {
         <Route
           path='/register'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute forAuthorized>
               <Register />
             </ProtectedRoute>
           }
@@ -59,7 +61,7 @@ const App = () => {
         <Route
           path='/forgot-password'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute forAuthorized>
               <ForgotPassword />
             </ProtectedRoute>
           }
@@ -67,7 +69,7 @@ const App = () => {
         <Route
           path='/reset-password'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute forAuthorized>
               <ResetPassword />
             </ProtectedRoute>
           }
@@ -75,7 +77,7 @@ const App = () => {
         <Route
           path='/profile'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute forAuthorized>
               <Profile />
             </ProtectedRoute>
           }
@@ -83,8 +85,16 @@ const App = () => {
         <Route
           path='/profile/orders'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute forAuthorized>
               <ProfileOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile/orders:number'
+          element={
+            <ProtectedRoute forAuthorized>
+              <OrderInfo />
             </ProtectedRoute>
           }
         />

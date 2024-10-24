@@ -11,6 +11,7 @@ import {
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
+import { deleteCookie, setCookie } from '../utils/cookie';
 
 export interface IUserState {
   isLoading: boolean;
@@ -65,6 +66,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
+  selectors: {
+    isAuthorizedSelector: (state) => state.isAuthorized,
+    getUserSelector: (state) => state.user
+  },
   extraReducers: (builder) => {
     builder
       // registerUser
@@ -80,7 +85,8 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.user = action.payload.user;
-        /** TODO: сохрани токены: refreshToken->localStorage, accessToken->setCookie */
+        setCookie('accessToken', action.payload.accessToken);
+        localStorage.setItem('refreshToken', action.payload.refreshToken);
       })
 
       // loginUser
@@ -97,7 +103,8 @@ const userSlice = createSlice({
         state.error = null;
         state.isAuthorized = true;
         state.user = action.payload.user;
-        /** TODO: сохрани токены: refreshToken->localStorage, accessToken->setCookie */
+        setCookie('accessToken', action.payload.accessToken);
+        localStorage.setItem('refreshToken', action.payload.refreshToken);
       })
 
       // forgotPassword
@@ -174,9 +181,11 @@ const userSlice = createSlice({
         state.error = null;
         state.user = null;
         state.isAuthorized = false;
-        /** TODO: удали токены: refreshToken->localStorage, accessToken->setCookie */
+        deleteCookie('accessToken');
+        localStorage.removeItem('refreshToken');
       });
   }
 });
 
+export const { isAuthorizedSelector, getUserSelector } = userSlice.selectors;
 export default userSlice;
