@@ -6,6 +6,7 @@ import {
   createOrderThunk,
   nulledOrderModalData
 } from '../../slices/constructorSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,14 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = useSelector(
     (state) => state.constructorBurger.orderModalData
   );
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+  const navigate = useNavigate();
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+    if (!isAuthorized) {
+      navigate('/login');
+    }
 
     const dataOrder = [
       constructorItems.bun._id,
