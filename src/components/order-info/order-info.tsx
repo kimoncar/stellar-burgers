@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
@@ -66,24 +66,5 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  console.log(orderInfo);
-
   return <OrderInfoUI orderInfo={orderInfo} />;
 };
-function useEffect(
-  arg0: () => void,
-  arg1: (import('redux-thunk').ThunkDispatch<
-    {
-      ingredients: import('../../slices/ingredientsSlice').IIngredientsState;
-      constructorBurger: import('../../slices/constructorSlice').IConstructorState;
-      user: import('../../slices/userSlice').IUserState;
-      feed: import('../../slices/feedSlice').IFeedState;
-      order: import('../../slices/orderSlice').IFeedState;
-    },
-    undefined,
-    import('redux').UnknownAction
-  > &
-    import('redux').Dispatch<import('redux').UnknownAction>)[]
-) {
-  throw new Error('Function not implemented.');
-}

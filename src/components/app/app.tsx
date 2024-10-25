@@ -13,7 +13,13 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate
+} from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
@@ -21,6 +27,10 @@ import { getIngredientsThunk } from '../../slices/ingredientsSlice';
 import { getUserThunk } from '../../slices/userSlice';
 
 const App = () => {
+  const profileMatch = useMatch('/profile/orders/:number')?.params.number;
+  const feedMatch = useMatch('/feed/:number')?.params.number;
+  const orderNumber = profileMatch || feedMatch;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,8 +50,10 @@ const App = () => {
       <AppHeader />
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
-        <Route path='/feed' element={<Feed />} />
         <Route path='*' element={<NotFound404 />} />
+        <Route path='/feed/' element={<Feed />} />
+        <Route path='/feed/:number' element={<OrderInfo />} />
+
         <Route
           path='/login'
           element={
@@ -91,7 +103,7 @@ const App = () => {
           }
         />
         <Route
-          path='/profile/orders:number'
+          path='/profile/orders/:number'
           element={
             <ProtectedRoute forAuthorized>
               <OrderInfo />
@@ -105,8 +117,8 @@ const App = () => {
             path='/feed/:number'
             element={
               <Modal
-                title='feed_number'
-                onClose={() => console.log('close:feed_number')}
+                title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
+                onClose={handleCloseModal}
               >
                 <OrderInfo />
               </Modal>
