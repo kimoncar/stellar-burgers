@@ -133,7 +133,6 @@ const App = () => {
           />
         </Routes>
       )}
-      ;
     </div>
   );
 };

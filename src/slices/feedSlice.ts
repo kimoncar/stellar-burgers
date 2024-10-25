@@ -18,20 +18,20 @@ const initialState: IFeedState = {
   error: null
 };
 
-export const getFeedsThunk = createAsyncThunk(
-  'feeds/getAll',
-  async () => await getFeedsApi()
-);
+export const getFeedsThunk = createAsyncThunk('feed/getAll', getFeedsApi);
 
-export const getUserFeedsThunk = createAsyncThunk(
-  'feeds/getUserFeeds',
-  async () => await getOrdersApi()
+export const getUserOrdersThunk = createAsyncThunk(
+  'feed/getUserOrders',
+  getOrdersApi
 );
 
 const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
+  selectors: {
+    getOrdersSelector: (state) => state.orders
+  },
   extraReducers: (builder) => {
     builder
       // getFeeds
@@ -52,15 +52,15 @@ const feedSlice = createSlice({
       })
 
       // getUserFeeds
-      .addCase(getUserFeedsThunk.pending, (state) => {
+      .addCase(getUserOrdersThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getUserFeedsThunk.rejected, (state, action) => {
+      .addCase(getUserOrdersThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message as string;
       })
-      .addCase(getUserFeedsThunk.fulfilled, (state, action) => {
+      .addCase(getUserOrdersThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.orders = action.payload;
@@ -68,4 +68,5 @@ const feedSlice = createSlice({
   }
 });
 
+export const { getOrdersSelector } = feedSlice.selectors;
 export default feedSlice;
