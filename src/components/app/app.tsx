@@ -25,6 +25,7 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredientsThunk } from '../../slices/ingredientsSlice';
 import { getUserThunk } from '../../slices/userSlice';
+import { nulledOrderModalData } from '../../slices/constructorSlice';
 
 const App = () => {
   const profileMatch = useMatch('/profile/orders/:number')?.params.number;
@@ -52,8 +53,19 @@ const App = () => {
         <Route path='/' element={<ConstructorPage />} />
         <Route path='*' element={<NotFound404 />} />
         <Route path='/feed/' element={<Feed />} />
-        <Route path='/feed/:number' element={<OrderInfo />} />
-
+        <Route
+          path='/feed/:number'
+          element={
+            <div className={styles.detailPageWrap}>
+              <p
+                className={`text text_type_digits-default ${styles.detailHeader}`}
+              >
+                #{orderNumber && orderNumber.padStart(6, '0')}
+              </p>
+              <OrderInfo />
+            </div>
+          }
+        />
         <Route
           path='/login'
           element={
@@ -108,6 +120,17 @@ const App = () => {
             <ProtectedRoute forAuthorized>
               <OrderInfo />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <div className={styles.detailPageWrap}>
+              <p className={`text text_type_main-large ${styles.detailHeader}`}>
+                Детали ингредиента
+              </p>
+              <IngredientDetails />
+            </div>
           }
         />
       </Routes>
