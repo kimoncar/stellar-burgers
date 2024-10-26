@@ -12,7 +12,5 @@ export const ProfileOrders: FC = () => {
     dispatch(getUserOrdersThunk());
   }, []);
 
-  console.log(orders);
-
   return <ProfileOrdersUI orders={orders} />;
 };

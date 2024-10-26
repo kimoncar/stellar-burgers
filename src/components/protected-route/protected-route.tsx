@@ -1,30 +1,26 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from '../../services/store';
-import { ReactElement } from 'react';
+import { useDispatch, useSelector } from '../../services/store';
+import { ReactElement, useEffect } from 'react';
 import { isAuthorizedSelector } from '../../slices/userSlice';
 
 type ProtectedRouteProps = {
   children: ReactElement;
-  forAuthorized?: boolean;
+  forGuest?: boolean;
 };
 
-export const ProtectedRoute = ({
-  children,
-  forAuthorized = false
-}: ProtectedRouteProps) => {
+export const ProtectedRoute = ({ children, forGuest }: ProtectedRouteProps) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const isAuthorized = useSelector(isAuthorizedSelector);
 
-  const path = location.state?.from || '/';
-  console.log(isAuthorized);
-  /*
-  if (!forAuthorized && isAuthorized) {
+  if (!forGuest && !isAuthorized) {
+    return <Navigate to={'/login'} state={{ from: location }} />;
+  }
+
+  if (forGuest && isAuthorized) {
+    const path = location.state?.from || '/';
     return <Navigate to={path} />;
   }
 
-  if (forAuthorized && !isAuthorized) {
-    return <Navigate to={'/login'} state={{ from: location }} />;
-  }
-  */
   return children;
 };

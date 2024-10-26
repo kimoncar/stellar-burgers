@@ -52,14 +52,9 @@ export const updateUserThunk = createAsyncThunk(
   (data: Partial<TRegisterData>) => updateUserApi(data)
 );
 
-export const getUserThunk = createAsyncThunk(
-  'user/get',
-  async () => await getUserApi()
-);
-
-export const logoutUserThunk = createAsyncThunk(
-  'user/logout',
-  async () => await logoutApi()
+export const getUserThunk = createAsyncThunk('user/get', () => getUserApi());
+export const logoutUserThunk = createAsyncThunk('user/logout', () =>
+  logoutApi()
 );
 
 const userSlice = createSlice({

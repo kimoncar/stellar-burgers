@@ -25,7 +25,6 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredientsThunk } from '../../slices/ingredientsSlice';
 import { getUserThunk } from '../../slices/userSlice';
-import { nulledOrderModalData } from '../../slices/constructorSlice';
 
 const App = () => {
   const profileMatch = useMatch('/profile/orders/:number')?.params.number;
@@ -42,7 +41,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    //dispatch(getUserThunk());
+    dispatch(getUserThunk());
     dispatch(getIngredientsThunk());
   }, [dispatch]);
 
@@ -52,7 +51,7 @@ const App = () => {
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='*' element={<NotFound404 />} />
-        <Route path='/feed/' element={<Feed />} />
+        <Route path='/feed' element={<Feed />} />
         <Route
           path='/feed/:number'
           element={
@@ -69,7 +68,7 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute forGuest>
               <Login />
             </ProtectedRoute>
           }
@@ -77,7 +76,7 @@ const App = () => {
         <Route
           path='/register'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute forGuest>
               <Register />
             </ProtectedRoute>
           }
@@ -85,7 +84,7 @@ const App = () => {
         <Route
           path='/forgot-password'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute forGuest>
               <ForgotPassword />
             </ProtectedRoute>
           }
@@ -93,7 +92,7 @@ const App = () => {
         <Route
           path='/reset-password'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute forGuest>
               <ResetPassword />
             </ProtectedRoute>
           }
@@ -101,7 +100,7 @@ const App = () => {
         <Route
           path='/profile'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
@@ -109,7 +108,7 @@ const App = () => {
         <Route
           path='/profile/orders'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute>
               <ProfileOrders />
             </ProtectedRoute>
           }
@@ -117,7 +116,7 @@ const App = () => {
         <Route
           path='/profile/orders/:number'
           element={
-            <ProtectedRoute forAuthorized>
+            <ProtectedRoute>
               <div className={styles.detailPageWrap}>
                 <p
                   className={`text text_type_digits-default ${styles.detailHeader}`}
