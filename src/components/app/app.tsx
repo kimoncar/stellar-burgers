@@ -118,7 +118,14 @@ const App = () => {
           path='/profile/orders/:number'
           element={
             <ProtectedRoute forAuthorized>
-              <OrderInfo />
+              <div className={styles.detailPageWrap}>
+                <p
+                  className={`text text_type_digits-default ${styles.detailHeader}`}
+                >
+                  #{orderNumber && orderNumber.padStart(6, '0')}
+                </p>
+                <OrderInfo />
+              </div>
             </ProtectedRoute>
           }
         />
@@ -159,8 +166,8 @@ const App = () => {
             path='/profile/orders/:number'
             element={
               <Modal
-                title='orders_number'
-                onClose={() => console.log('close:orders_number')}
+                title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
+                onClose={handleCloseModal}
               >
                 <OrderInfo />
               </Modal>
