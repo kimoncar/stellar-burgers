@@ -16,6 +16,7 @@ import { deleteCookie, setCookie } from '../utils/cookie';
 export interface IUserState {
   isLoading: boolean;
   isAuthorized: boolean;
+  isAuthChecked: boolean;
   user: TUser | null;
   error: string | null;
 }
@@ -23,6 +24,7 @@ export interface IUserState {
 const initialState: IUserState = {
   isLoading: false,
   isAuthorized: false,
+  isAuthChecked: false,
   user: null,
   error: null
 };
@@ -63,6 +65,7 @@ const userSlice = createSlice({
   reducers: {},
   selectors: {
     isAuthorizedSelector: (state) => state.isAuthorized,
+    isAuthCheckedSelector: (state) => state.isAuthChecked,
     getUserSelector: (state) => state.user
   },
   extraReducers: (builder) => {
@@ -153,12 +156,14 @@ const userSlice = createSlice({
       })
       .addCase(getUserThunk.rejected, (state, action) => {
         state.isLoading = false;
+        state.isAuthChecked = true;
         state.error = action.error as string;
       })
       .addCase(getUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.isAuthorized = true;
+        state.isAuthChecked = true;
         state.user = action.payload.user;
       })
 
@@ -182,5 +187,6 @@ const userSlice = createSlice({
   }
 });
 
-export const { isAuthorizedSelector, getUserSelector } = userSlice.selectors;
+export const { isAuthorizedSelector, getUserSelector, isAuthCheckedSelector } =
+  userSlice.selectors;
 export default userSlice;
