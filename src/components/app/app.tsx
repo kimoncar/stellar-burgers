@@ -21,15 +21,17 @@ import {
   useNavigate
 } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredientsThunk } from '../../slices/ingredientsSlice';
-import { getUserThunk } from '../../slices/userSlice';
+import { getUserThunk, isAuthorizedSelector } from '../../slices/userSlice';
 
 const App = () => {
   const profileMatch = useMatch('/profile/orders/:number')?.params.number;
   const feedMatch = useMatch('/feed/:number')?.params.number;
   const orderNumber = profileMatch || feedMatch;
+
+  const isAuth = useSelector(isAuthorizedSelector);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,7 +43,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    dispatch(getUserThunk());
+    if (!isAuth) {
+      dispatch(getUserThunk());
+    }
     dispatch(getIngredientsThunk());
   }, [dispatch]);
 

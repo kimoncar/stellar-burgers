@@ -10,9 +10,9 @@ export const Login: FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const error = useSelector((state) => state.user.error);
+  const user = useSelector((state) => state.user);
 
-  console.log(error);
+  console.log(user);
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ export const Login: FC = () => {
 
   return (
     <LoginUI
-      errorText={error?.toString()}
+      errorText={user.error?.toString()}
       email={email}
       setEmail={setEmail}
       password={password}
