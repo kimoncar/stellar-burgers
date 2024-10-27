@@ -113,7 +113,7 @@ const userSlice = createSlice({
       })
       .addCase(forgotPasswordThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error as string;
+        state.error = action.error.message as string;
       })
       .addCase(forgotPasswordThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -127,7 +127,7 @@ const userSlice = createSlice({
       })
       .addCase(resetPasswordThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error as string;
+        state.error = action.error.message as string;
       })
       .addCase(resetPasswordThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -141,7 +141,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUserThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error as string;
+        state.error = action.error.message as string;
       })
       .addCase(updateUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -158,7 +158,7 @@ const userSlice = createSlice({
       .addCase(getUserThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isAuthChecked = true;
-        state.error = action.error as string;
+        state.error = action.error.message as string;
       })
       .addCase(getUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -175,7 +175,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUserThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error as string;
+        state.error = action.error.message as string;
       })
       .addCase(logoutUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
