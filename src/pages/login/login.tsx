@@ -12,8 +12,6 @@ export const Login: FC = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  console.log(user);
-
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {

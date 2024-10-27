@@ -82,6 +82,7 @@ const userSlice = createSlice({
       .addCase(registerUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.isAuthorized = true;
         state.user = action.payload.user;
         setCookie('accessToken', action.payload.accessToken);
         localStorage.setItem('refreshToken', action.payload.refreshToken);
