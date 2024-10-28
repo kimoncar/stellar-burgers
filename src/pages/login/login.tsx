@@ -16,7 +16,7 @@ export const Login: FC = () => {
     e.preventDefault();
     try {
       await dispatch(loginUserThunk({ email, password })).unwrap();
-      navigate('/profile', { replace: true });
+      navigate('/', { replace: true });
     } catch (e) {}
   };
 
