@@ -17,7 +17,7 @@ export const Register: FC = () => {
     e.preventDefault();
     try {
       await dispatch(registerUserThunk({ email, name, password })).unwrap();
-      navigate('/profile');
+      navigate('/');
     } catch (e) {}
   };
 
