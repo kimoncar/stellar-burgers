@@ -30,7 +30,6 @@ const App = () => {
   const profileMatch = useMatch('/profile/orders/:number')?.params.number;
   const feedMatch = useMatch('/feed/:number')?.params.number;
   const orderNumber = profileMatch || feedMatch;
-
   const isAuth = useSelector(isAuthorizedSelector);
 
   const dispatch = useDispatch();
