@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from '../../services/store';
-import { ReactElement } from 'react';
+import { useDispatch, useSelector } from '../../services/store';
+import { ReactElement, useEffect } from 'react';
 import {
   isAuthCheckedSelector,
   isAuthorizedSelector

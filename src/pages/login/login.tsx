@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useState } from 'react';
+import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ export const Login: FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  let error = useSelector((state) => state.user.error);
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export const Login: FC = () => {
 
   return (
     <LoginUI
-      errorText={user.error?.toString()}
+      errorText={error?.toString()}
       email={email}
       setEmail={setEmail}
       password={password}
