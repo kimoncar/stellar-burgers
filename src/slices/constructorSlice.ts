@@ -22,7 +22,7 @@ const initialState: IConstructorState = {
 
 export const createOrderThunk = createAsyncThunk(
   'order/create',
-  (data: string[]) => orderBurgerApi(data)
+  orderBurgerApi
 );
 
 const constructorSlice = createSlice({

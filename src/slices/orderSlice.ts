@@ -15,8 +15,9 @@ const initialState: IFeedState = {
   error: null
 };
 
-export const getOrderThunk = createAsyncThunk('order/order', (data: number) =>
-  getOrderByNumberApi(data)
+export const getOrderThunk = createAsyncThunk(
+  'order/order',
+  getOrderByNumberApi
 );
 
 const orderSlice = createSlice({

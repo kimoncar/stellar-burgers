@@ -31,33 +31,25 @@ const initialState: IUserState = {
 
 export const registerUserThunk = createAsyncThunk(
   'user/register',
-  (data: TRegisterData) => registerUserApi(data)
+  registerUserApi
 );
 
-export const loginUserThunk = createAsyncThunk(
-  'user/login',
-  (data: TLoginData) => loginUserApi(data)
-);
+export const loginUserThunk = createAsyncThunk('user/login', loginUserApi);
 
 export const forgotPasswordThunk = createAsyncThunk(
   'user/forgotPassword',
-  (data: Pick<TLoginData, 'email'>) => forgotPasswordApi(data)
+  forgotPasswordApi
 );
 
 export const resetPasswordThunk = createAsyncThunk(
   'user/resetPassword',
-  (data: { password: string; token: string }) => resetPasswordApi(data)
+  resetPasswordApi
 );
 
-export const updateUserThunk = createAsyncThunk(
-  'user/update',
-  (data: Partial<TRegisterData>) => updateUserApi(data)
-);
+export const updateUserThunk = createAsyncThunk('user/update', updateUserApi);
 
-export const getUserThunk = createAsyncThunk('user/get', () => getUserApi());
-export const logoutUserThunk = createAsyncThunk('user/logout', () =>
-  logoutApi()
-);
+export const getUserThunk = createAsyncThunk('user/get', getUserApi);
+export const logoutUserThunk = createAsyncThunk('user/logout', logoutApi);
 
 const userSlice = createSlice({
   name: 'user',
