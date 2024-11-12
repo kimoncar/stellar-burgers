@@ -1,5 +1,6 @@
 describe('Проверяем сценарии', function() {
   beforeEach(() => {
+    
     // До проверок
     // Установить тестовые токены
     cy.setCookie('accessToken', 'accessTokenValue');
@@ -17,14 +18,28 @@ describe('Проверяем сценарии', function() {
   });
 
   afterEach(() => {
+
     // После проверок
     // Удалить тестовые токены
     cy.clearCookie('accessToken');
     localStorage.removeItem('refreshToken');
   });
 
-  test('[#1] - тест добавления ингредиента в конструктор бургера', function() {
-    // В конструкторе не должно быть элементов
+  it('[#1] - тест добавления ингредиента в конструктор бургера', function() {
+
+    // В конструкторе не должно быть добавляемого элемента
+    cy.get('[data-testid="burger-constructor"]')
+      .should('not.contain.text', 'Филе Люминесцентного тетраодонтимформа');
+
     // Добавление ингредиента по клику
+    cy.get('[data-testid="link-ingredient"]')
+      .contains('Филе Люминесцентного тетраодонтимформа')
+      .parents('li')
+      .find('button')
+      .click();
+
+    // Проверка добавленного ингредиента  
+    cy.get('[data-testid="burger-constructor"]')
+      .should('contain.text', 'Филе Люминесцентного тетраодонтимформа');
   });
 });
