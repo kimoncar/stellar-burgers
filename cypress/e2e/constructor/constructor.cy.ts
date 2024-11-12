@@ -26,8 +26,7 @@ describe('Проверяем сценарии', function() {
   describe('Проверка конструктора бургера', function() {
     it('[#1] - тест добавления ингредиента в конструктор бургера', function() {
       // В конструкторе не должно быть добавляемого ингредиента
-      cy.get('[data-testid="burger-constructor"]')
-        .should('not.contain.text', 'Филе Люминесцентного тетраодонтимформа');
+      cy.get('[data-testid="burger-constructor"]').should('not.contain.text', 'Филе Люминесцентного тетраодонтимформа');
 
       // Добавление ингредиента по клику на кнопку
       cy.get('[data-testid="link-ingredient"]')
@@ -37,11 +36,10 @@ describe('Проверяем сценарии', function() {
         .click();
 
       // Проверка добавленного ингредиента  
-      cy.get('[data-testid="burger-constructor"]')
-        .should('contain.text', 'Филе Люминесцентного тетраодонтимформа');
+      cy.get('[data-testid="burger-constructor"]').should('contain.text', 'Филе Люминесцентного тетраодонтимформа');
     });
 
-    it('[#2] - тест создания заказа, закрытия модального окна, очистки конструктора', function() {
+    it('[#2] - тест создания заказа, закрытия модального окна (на "крестик"), очистки конструктора', function() {
       // В конструкторе не должно быть добавляемых ингредиентов
       cy.get('[data-testid="burger-constructor"]')
         .should('not.contain.text', 'Флюоресцентная булка R2-D3')
@@ -81,10 +79,8 @@ describe('Проверяем сценарии', function() {
         .and('contain.text', '59069');
       
       // Проверка закрытия модального окна на "крестик"
-      cy.get('[data-testid="icon-close-modal"]')
-        .click();
-      cy.get('[data-testid="modal"]')
-        .should('not.exist');
+      cy.get('[data-testid="icon-close-modal"]').click();
+      cy.get('[data-testid="modal"]').should('not.exist');
 
       // Конструктор должен быть очищен от ингредиентов
       cy.get('[data-testid="burger-constructor"]')
@@ -92,6 +88,32 @@ describe('Проверяем сценарии', function() {
         .and('not.contain.text', 'Филе Люминесцентного тетраодонтимформа')
         .and('not.contain.text', 'Соус Spicy-X');
     });
+  });
 
+  describe('Проверка просмотра ингредиентов', function() {
+    it('[#1] - тест открытия и закрытия (на overlay) модального окна с описанием ингредиента', function() {
+      // Список ингредиентов не должен быть пуст
+      cy.get('[data-testid="ingredients-list"]')
+        .should('contain.text', 'Флюоресцентная булка R2-D3')
+        .and('contain.text', 'Филе Люминесцентного тетраодонтимформа')
+        .and('contain.text', 'Соус Spicy-X');
+
+      // Модальное окно должно быть закрыто
+      cy.get('[data-testid="modal"]').should('not.exist');
+
+      // Открытие модального окна с описанием ингредиента
+      cy.get('[data-testid="link-ingredient"]')
+        .contains('Флюоресцентная булка R2-D3')
+        .click();
+
+      // Проверка открытия модального окна с описанием ингредиента
+      cy.get('[data-testid="modal"]')
+        .should('exist')
+        .and('contain.text', 'Флюоресцентная булка R2-D3');
+
+      // Проверка закрытия модального окна на overlay
+      cy.get('[data-testid="overlay-modal"]').click('left', { force: true });
+      cy.get('[data-testid="modal"]').should('not.exist');
+    });
   });
 });
