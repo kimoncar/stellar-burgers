@@ -17,6 +17,7 @@ describe('Проверка rootReducer', () => {
     }
     const newState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
 
+    // Рекурсивное сравнение состояний
     expect(newState).toEqual(initialState);
   })
 });
