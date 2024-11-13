@@ -10,7 +10,7 @@ export interface IFeedState {
   error: string | null;
 }
 
-const initialState: IFeedState = {
+export const initialState: IFeedState = {
   isLoading: false,
   orders: [],
   total: 0,
