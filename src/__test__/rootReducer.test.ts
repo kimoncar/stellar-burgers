@@ -13,10 +13,9 @@ describe('Проверка rootReducer', () => {
       user: userInitialState,
       feed: feedInitialState,
       order: orderInitialState
-    }
+    };
+    
     const newState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
-
-    // Рекурсивное сравнение объектов состояний
     expect(newState).toEqual(initialState);
   })
 });
