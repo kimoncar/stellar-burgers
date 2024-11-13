@@ -91,7 +91,16 @@ const config: Config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    "@pages": ["src/pages"],
+    "@components": ["src/components"],
+    "@ui": ["src/components/ui"],
+    "@ui-pages": ["src/components/ui/pages"],
+    "@utils-types": ["src/utils/types"],
+    "@api": ["src/utils/burger-api.ts"],
+    "@slices": ["src/services/slices"],
+    "@selectors": ["src/services/selectors"]
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
