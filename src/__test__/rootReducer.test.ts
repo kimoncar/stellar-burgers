@@ -1,4 +1,3 @@
-import { describe, test } from "@jest/globals";
 import { rootReducer } from '../services/store';
 import { initialState as ingredientInitialState } from '../slices/ingredientsSlice';
 import { initialState as constructorInitialState } from '../slices/constructorSlice';
@@ -17,7 +16,7 @@ describe('Проверка rootReducer', () => {
     }
     const newState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
 
-    // Рекурсивное сравнение состояний
+    // Рекурсивное сравнение объектов состояний
     expect(newState).toEqual(initialState);
   })
 });
