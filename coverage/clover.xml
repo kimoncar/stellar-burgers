@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1731580936606" clover="3.2.0">
-  <project timestamp="1731580936607" name="All files">
-    <metrics statements="772" coveredstatements="478" conditionals="14" coveredconditionals="14" methods="37" coveredmethods="5" elements="823" coveredelements="497" complexity="0" loc="772" ncloc="772" packages="3" files="8" classes="8"/>
+<coverage generated="1731586050751" clover="3.2.0">
+  <project timestamp="1731586050751" name="All files">
+    <metrics statements="772" coveredstatements="478" conditionals="16" coveredconditionals="16" methods="37" coveredmethods="7" elements="825" coveredelements="501" complexity="0" loc="772" ncloc="772" packages="3" files="8" classes="8"/>
     <package name="services">
       <metrics statements="34" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="store.ts" path="D:\YandexPractikum\stellar-burgers\src\services\store.ts">
@@ -43,7 +43,7 @@
       </file>
     </package>
     <package name="slices">
-      <metrics statements="456" coveredstatements="357" conditionals="14" coveredconditionals="14" methods="18" coveredmethods="5"/>
+      <metrics statements="456" coveredstatements="357" conditionals="16" coveredconditionals="16" methods="18" coveredmethods="7"/>
       <file name="constructorSlice.ts" path="D:\YandexPractikum\stellar-burgers\src\slices\constructorSlice.ts">
         <metrics statements="102" coveredstatements="70" conditionals="1" coveredconditionals="1" methods="7" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -150,7 +150,7 @@
         <line num="102" count="1" type="stmt"/>
       </file>
       <file name="feedSlice.ts" path="D:\YandexPractikum\stellar-burgers\src\slices\feedSlice.ts">
-        <metrics statements="74" coveredstatements="74" conditionals="7" coveredconditionals="7" methods="3" coveredmethods="1"/>
+        <metrics statements="74" coveredstatements="74" conditionals="9" coveredconditionals="9" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -183,8 +183,8 @@
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="34" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="37" count="2" type="stmt"/>
@@ -198,11 +198,11 @@
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
         <line num="47" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
         <line num="53" count="2" type="stmt"/>
         <line num="54" count="2" type="stmt"/>
         <line num="55" count="2" type="stmt"/>
@@ -215,9 +215,9 @@
         <line num="62" count="1" type="stmt"/>
         <line num="63" count="2" type="stmt"/>
         <line num="64" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="66" count="2" type="stmt"/>
-        <line num="67" count="2" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
         <line num="68" count="2" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
         <line num="70" count="1" type="stmt"/>

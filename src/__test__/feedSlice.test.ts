@@ -2,13 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import feedSlice, { getFeedsThunk, getOrdersSelector, getUserOrdersThunk, initialState, isLoadingOrdersSelector } from "../slices/feedSlice";
 
 // Хранилище для тестов
-const testStore = () => {
-  return configureStore({
-    reducer: {
-      feed: feedSlice.reducer
-    }
-  })
-};
+const testStore = () => configureStore({
+  reducer: {
+    feed: feedSlice.reducer
+  }
+});
 
 describe('Проверяем feedSlice', () => {
   describe('Проверяем исходное состояние', () => {
@@ -139,21 +137,18 @@ describe('Проверяем feedSlice', () => {
 
     describe('Проверяем селекторы', () => {
       const store = testStore();
-      testStore().dispatch({
-        type: getUserOrdersThunk.fulfilled.type,
+      store.dispatch({
+        type: getFeedsThunk.fulfilled.type,
         payload: testFeedsData
       });
       
       it('[#1] - тест селектора getOrdersSelector', () => {
-        //expect(getOrdersSelector(store.getState())).toEqual(testFeedsData);
-        console.log(store.getState());
+        expect(getOrdersSelector(store.getState())).toEqual(testFeedsData.orders);
       });
-
-      /*
+      
       it('[#2] - тест селектора isLoadingOrdersSelector', () => {
-        expect(isLoadingOrdersSelector(store.getState())).toEqual(testFeedsData);
-      });
-      */
+        expect(isLoadingOrdersSelector(store.getState())).toBeFalsy();
+      });      
     });
   });
 });
