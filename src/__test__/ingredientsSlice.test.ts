@@ -2,13 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import ingredientsSlice, { getIngredientsThunk, initialState } from "../slices/ingredientsSlice";
 
 // Хранилище для тестов
-const testStore = () => {
-  return configureStore({
-    reducer: {
-      ingredients: ingredientsSlice.reducer
-    }
-  })
-};
+const testStore = () => configureStore({
+  reducer: {
+    ingredients: ingredientsSlice.reducer
+  }
+});
 
 describe('Проверяем ingredientSlice', () => {
   describe('Проверяем исходное состояние', () => {
