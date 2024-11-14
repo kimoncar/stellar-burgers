@@ -1,5 +1,7 @@
+import { configureStore } from "@reduxjs/toolkit";
 import constructorSlice, { 
   addIngredient,
+  createOrderThunk,
   initialState,
   moveDown,
   moveUp,
@@ -17,15 +19,6 @@ jest.mock('@reduxjs/toolkit', () => ({
 }));
 
 describe('Проверяем constructorSlice', () => {
-  /*
-  describe('Проверяем исходное состояние', () => {
-    it('[#1] - тест исходного состояния', () => {
-      const store = testStore();
-      expect(store.getState().constructorBurger).toEqual(initialState);
-    });
-  });
-  */
-
   describe('Проверяем редьюсеры', () => {
     const testIngredientsData = [
       {
@@ -131,6 +124,35 @@ describe('Проверяем constructorSlice', () => {
 
       const newState = constructorSliceReducer(testState, nulledOrderModalData());
       expect(newState.orderModalData).toBeNull();
+    });
+  });
+
+  describe('Проверяем дополнительные редьюсеры (extraReducers)', () => {
+    // Хранилище для тестов
+    const testStore = () => configureStore({
+      reducer: {
+        constructorBurger: constructorSliceReducer
+      }
+    });
+
+    describe('Проверяем исходное состояние', () => {
+      it('[#1] - тест исходного состояния', () => {
+        const store = testStore();
+        expect(store.getState().constructorBurger).toEqual(initialState);
+      });
+    });
+
+    describe('Проверяем createOrderThunk', () => {
+      it('[#1] - тест ожидания ответа (createOrderThunk.pending)', () => {
+        const store = testStore();
+        store.dispatch({
+          type: createOrderThunk.pending.type
+        });
+
+        expect(store.getState().constructorBurger.isLoading).toBeTruthy();
+        expect(store.getState().constructorBurger.orderRequest).toBeTruthy();
+        expect(store.getState().constructorBurger.error).toBeNull();
+      });
     });
   });
 });
