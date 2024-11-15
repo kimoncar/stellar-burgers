@@ -19,41 +19,23 @@ jest.mock('@reduxjs/toolkit', () => ({
 }));
 
 describe('Проверяем constructorSlice', () => {
-  describe('Проверяем редьюсеры', () => {
-    const testIngredientsData = [
-      {
-        "id": "mockIngredientId",
-        "_id": "643d69a5c3f7b9001cfa093e",
-        "name": "Филе Люминесцентного тетраодонтимформа",
-        "type": "main",
-        "proteins": 44,
-        "fat": 26,
-        "carbohydrates": 85,
-        "calories": 643,
-        "price": 988,
-        "image": "https://code.s3.yandex.net/react/code/meat-03.png",
-        "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
-        "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-        "__v": 0
-      },
-      {
-        "id": "mockIngredientId",
-        "_id": "643d69a5c3f7b9001cfa093f",
-        "name": "Мясо бессмертных моллюсков Protostomia",
-        "type": "main",
-        "proteins": 433,
-        "fat": 244,
-        "carbohydrates": 33,
-        "calories": 420,
-        "price": 1337,
-        "image": "https://code.s3.yandex.net/react/code/meat-02.png",
-        "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
-        "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-        "__v": 0
-      }
-    ];
-
-    const testIngredientData = {
+  const testIngredientsData = [
+    {
+      "id": "mockIngredientId",
+      "_id": "643d69a5c3f7b9001cfa093e",
+      "name": "Филе Люминесцентного тетраодонтимформа",
+      "type": "main",
+      "proteins": 44,
+      "fat": 26,
+      "carbohydrates": 85,
+      "calories": 643,
+      "price": 988,
+      "image": "https://code.s3.yandex.net/react/code/meat-03.png",
+      "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
+      "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
+      "__v": 0
+    },
+    {
       "id": "mockIngredientId",
       "_id": "643d69a5c3f7b9001cfa093f",
       "name": "Мясо бессмертных моллюсков Protostomia",
@@ -67,8 +49,26 @@ describe('Проверяем constructorSlice', () => {
       "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
       "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
       "__v": 0
-    };
+    }
+  ];
 
+  const testIngredientData = {
+    "id": "mockIngredientId",
+    "_id": "643d69a5c3f7b9001cfa093f",
+    "name": "Мясо бессмертных моллюсков Protostomia",
+    "type": "main",
+    "proteins": 433,
+    "fat": 244,
+    "carbohydrates": 33,
+    "calories": 420,
+    "price": 1337,
+    "image": "https://code.s3.yandex.net/react/code/meat-02.png",
+    "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
+    "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
+    "__v": 0
+  };
+
+  describe('Проверяем редьюсеры', () => {
     it('[#1] - тест addIngredient', () => {
       const newState = constructorSliceReducer(initialState, addIngredient(testIngredientData));
       expect(newState.ingredients[0]).toEqual(testIngredientData);
@@ -152,6 +152,68 @@ describe('Проверяем constructorSlice', () => {
         expect(store.getState().constructorBurger.isLoading).toBeTruthy();
         expect(store.getState().constructorBurger.orderRequest).toBeTruthy();
         expect(store.getState().constructorBurger.error).toBeNull();
+      });
+
+      it('[#2] - тест ошибки ответа (createOrderThunk.rejected)', () => {
+        const store = testStore();
+        store.dispatch({
+          type: createOrderThunk.rejected.type,
+          error: 'error'
+        });
+
+        expect(store.getState().constructorBurger.isLoading).toBeFalsy();
+        expect(store.getState().constructorBurger.orderRequest).toBeFalsy();
+        expect(store.getState().constructorBurger.error).toBe('error');
+      });
+
+      it('[#3] - тест получения ответа (createOrderThunk.fulfilled)', () => {
+        const testOrderData = {
+          "success": true,
+          "name": "Флюоресцентный spicy люминесцентный бургер",
+          "order": {
+            "ingredients": [
+              {
+                "_id": "643d69a5c3f7b9001cfa093d",
+                "name": "Флюоресцентная булка R2-D3",
+                "type": "bun",
+                "proteins": 44,
+                "fat": 26,
+                "carbohydrates": 85,
+                "calories": 643,
+                "price": 988,
+                "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+                "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+                "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+                "__v": 0
+              }
+            ],
+            "_id": "67321bc0b27b06001c3e7950",
+            "owner": {
+                "name": "LoremIpsum",
+                "email": "lorem@ipsum.li",
+                "createdAt": "2024-10-24T10:27:38.047Z",
+                "updatedAt": "2024-10-24T12:04:21.937Z"
+            },
+            "status": "done",
+            "name": "Флюоресцентный spicy люминесцентный бургер",
+            "createdAt": "2024-11-11T14:59:12.925Z",
+            "updatedAt": "2024-11-11T14:59:13.810Z",
+            "number": 59069,
+            "price": 3054
+          }
+        };
+
+        const store = testStore();
+        store.dispatch({
+          type: createOrderThunk.fulfilled.type,
+          payload: testOrderData
+        });
+
+        expect(store.getState().constructorBurger.isLoading).toBeFalsy();
+        expect(store.getState().constructorBurger.error).toBeNull();
+        expect(store.getState().constructorBurger.orderRequest).toBeFalsy();
+        expect(store.getState().constructorBurger.ingredients).toEqual([]);
+        expect(store.getState().constructorBurger.orderModalData).toEqual(testOrderData.order);
       });
     });
   });

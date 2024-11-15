@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1731614418245" clover="3.2.0">
-  <project timestamp="1731614418245" name="All files">
-    <metrics statements="772" coveredstatements="500" conditionals="25" coveredconditionals="24" methods="37" coveredmethods="13" elements="834" coveredelements="537" complexity="0" loc="772" ncloc="772" packages="3" files="8" classes="8"/>
+<coverage generated="1731664484594" clover="3.2.0">
+  <project timestamp="1731664484595" name="All files">
+    <metrics statements="772" coveredstatements="509" conditionals="27" coveredconditionals="26" methods="37" coveredmethods="13" elements="836" coveredelements="548" complexity="0" loc="772" ncloc="772" packages="3" files="8" classes="8"/>
     <package name="services">
       <metrics statements="34" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="store.ts" path="D:\YandexPractikum\stellar-burgers\src\services\store.ts">
@@ -43,9 +43,9 @@
       </file>
     </package>
     <package name="slices">
-      <metrics statements="456" coveredstatements="379" conditionals="25" coveredconditionals="24" methods="18" coveredmethods="13"/>
+      <metrics statements="456" coveredstatements="388" conditionals="27" coveredconditionals="26" methods="18" coveredmethods="13"/>
       <file name="constructorSlice.ts" path="D:\YandexPractikum\stellar-burgers\src\slices\constructorSlice.ts">
-        <metrics statements="102" coveredstatements="92" conditionals="10" coveredconditionals="9" methods="7" coveredmethods="7"/>
+        <metrics statements="102" coveredstatements="101" conditionals="12" coveredconditionals="11" methods="7" coveredmethods="7"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -124,18 +124,18 @@
         <line num="76" count="1" type="stmt"/>
         <line num="77" count="1" type="stmt"/>
         <line num="78" count="2" type="stmt"/>
-        <line num="79" count="2" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
+        <line num="79" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
         <line num="83" count="2" type="stmt"/>
-        <line num="84" count="2" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
+        <line num="84" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
         <line num="91" count="2" type="stmt"/>
         <line num="92" count="2" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
