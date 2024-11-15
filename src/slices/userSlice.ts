@@ -5,8 +5,6 @@ import {
   logoutApi,
   registerUserApi,
   resetPasswordApi,
-  TLoginData,
-  TRegisterData,
   updateUserApi
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';

@@ -1,5 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice, { getUserSelector, getUserThunk, initialState, isAuthCheckedSelector, isAuthorizedSelector, IUserState, loginUserThunk, logoutUserThunk, registerUserThunk, updateUserThunk } from "../slices/userSlice";
+import userSlice, {
+  getUserSelector,
+  getUserThunk,
+  initialState,
+  isAuthCheckedSelector,
+  isAuthorizedSelector,
+  IUserState,
+  loginUserThunk,
+  logoutUserThunk,
+  registerUserThunk,
+  updateUserThunk
+} from "../slices/userSlice";
 
 // Хранилище для тестов
 const testStore = () => configureStore({
