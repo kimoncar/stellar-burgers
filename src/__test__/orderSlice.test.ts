@@ -1,5 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import orderSlice, { getOrderSelector, getOrderThunk, initialState, isLoadingOrderSelector } from "../slices/orderSlice";
+import orderSlice, {
+  getOrderSelector,
+  getOrderThunk,
+  initialState,
+  isLoadingOrderSelector
+} from "../slices/orderSlice";
 
 // Хранилище для тестов
 const testStore = () => configureStore({

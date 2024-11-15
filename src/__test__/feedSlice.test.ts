@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import feedSlice, { getFeedsThunk, getOrdersSelector, getUserOrdersThunk, initialState, isLoadingOrdersSelector } from "../slices/feedSlice";
+import feedSlice, {
+  getFeedsThunk,
+  getOrdersSelector,
+  getUserOrdersThunk,
+  initialState,
+  isLoadingOrdersSelector
+} from "../slices/feedSlice";
 
 // Хранилище для тестов
 const testStore = () => configureStore({
@@ -44,7 +50,7 @@ describe('Проверяем feedSlice', () => {
     loading: false,
     error: null
   };
-  
+
   describe('Проверяем исходное состояние', () => {
     it('[#1] - тест исходного состояния', () => {
       const store = testStore();

@@ -1,5 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import ingredientsSlice, { getIngredientsThunk, initialState } from "../slices/ingredientsSlice";
+import ingredientsSlice, {
+  getIngredientsThunk,
+  initialState
+} from "../slices/ingredientsSlice";
 
 // Хранилище для тестов
 const testStore = () => configureStore({
