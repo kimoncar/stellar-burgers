@@ -9,6 +9,42 @@ const testStore = () => configureStore({
 });
 
 describe('Проверяем feedSlice', () => {
+  const testFeedsData = {
+    orders: [
+      {
+        "_id": "6734b792b27b06001c3e7fb3",
+        "ingredients": [
+          "643d69a5c3f7b9001cfa093c",
+          "643d69a5c3f7b9001cfa0943",
+          "643d69a5c3f7b9001cfa0945",
+          "643d69a5c3f7b9001cfa093c"
+        ],
+        "status": "done",
+        "name": "Краторный space антарианский бургер",
+        "createdAt": "2024-11-13T14:28:34.071Z",
+        "updatedAt": "2024-11-13T14:28:34.952Z",
+        "number": 59322
+      },
+      {
+        "_id": "6734b347b27b06001c3e7fad",
+        "ingredients": [
+          "643d69a5c3f7b9001cfa093d",
+          "643d69a5c3f7b9001cfa093e",
+          "643d69a5c3f7b9001cfa093d"
+        ],
+        "status": "done",
+        "name": "Флюоресцентный люминесцентный бургер",
+        "createdAt": "2024-11-13T14:10:15.271Z",
+        "updatedAt": "2024-11-13T14:10:16.081Z",
+        "number": 59321
+      },
+    ],
+    total: 2,
+    totalToday: 2,
+    loading: false,
+    error: null
+  };
+  
   describe('Проверяем исходное состояние', () => {
     it('[#1] - тест исходного состояния', () => {
       const store = testStore();
@@ -17,42 +53,6 @@ describe('Проверяем feedSlice', () => {
   });
 
   describe('Проверяем дополнительные редьюсеры (extraReducers)', () => {
-    const testFeedsData = {
-      orders: [
-        {
-          "_id": "6734b792b27b06001c3e7fb3",
-          "ingredients": [
-            "643d69a5c3f7b9001cfa093c",
-            "643d69a5c3f7b9001cfa0943",
-            "643d69a5c3f7b9001cfa0945",
-            "643d69a5c3f7b9001cfa093c"
-          ],
-          "status": "done",
-          "name": "Краторный space антарианский бургер",
-          "createdAt": "2024-11-13T14:28:34.071Z",
-          "updatedAt": "2024-11-13T14:28:34.952Z",
-          "number": 59322
-        },
-        {
-          "_id": "6734b347b27b06001c3e7fad",
-          "ingredients": [
-            "643d69a5c3f7b9001cfa093d",
-            "643d69a5c3f7b9001cfa093e",
-            "643d69a5c3f7b9001cfa093d"
-          ],
-          "status": "done",
-          "name": "Флюоресцентный люминесцентный бургер",
-          "createdAt": "2024-11-13T14:10:15.271Z",
-          "updatedAt": "2024-11-13T14:10:16.081Z",
-          "number": 59321
-        },
-      ],
-      total: 2,
-      totalToday: 2,
-      loading: false,
-      error: null
-    };
-
     describe('Проверяем getFeedsThunk', () => {
       it('[#1] - тест ожидания ответа (getFeedsThunk.pending)', () => {
         const store = testStore();
@@ -133,22 +133,22 @@ describe('Проверяем feedSlice', () => {
         expect(store.getState().feed.totalToday).toBe(0);
         expect(store.getState().feed.orders).toEqual(testFeedsData);    
       });
-    });
+    });    
+  });
 
-    describe('Проверяем селекторы', () => {
-      const store = testStore();
-      store.dispatch({
-        type: getFeedsThunk.fulfilled.type,
-        payload: testFeedsData
-      });
-      
-      it('[#1] - тест селектора getOrdersSelector', () => {
-        expect(getOrdersSelector(store.getState())).toEqual(testFeedsData.orders);
-      });
-      
-      it('[#2] - тест селектора isLoadingOrdersSelector', () => {
-        expect(isLoadingOrdersSelector(store.getState())).toBeFalsy();
-      });      
+  describe('Проверяем селекторы', () => {
+    const store = testStore();
+    store.dispatch({
+      type: getFeedsThunk.fulfilled.type,
+      payload: testFeedsData
     });
+    
+    it('[#1] - тест селектора getOrdersSelector', () => {
+      expect(getOrdersSelector(store.getState())).toEqual(testFeedsData.orders);
+    });
+    
+    it('[#2] - тест селектора isLoadingOrdersSelector', () => {
+      expect(isLoadingOrdersSelector(store.getState())).toBeFalsy();
+    });      
   });
 });
