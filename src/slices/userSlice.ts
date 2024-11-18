@@ -5,8 +5,6 @@ import {
   logoutApi,
   registerUserApi,
   resetPasswordApi,
-  TLoginData,
-  TRegisterData,
   updateUserApi
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -21,7 +19,7 @@ export interface IUserState {
   error: string | null;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   isLoading: false,
   isAuthorized: false,
   isAuthChecked: false,

@@ -8,7 +8,7 @@ export interface IIngredientsState {
   ingredientsData: TIngredient[];
 }
 
-const initialState: IIngredientsState = {
+export const initialState: IIngredientsState = {
   isLoading: false,
   error: null,
   ingredientsData: []
@@ -19,7 +19,7 @@ export const getIngredientsThunk = createAsyncThunk(
   getIngredientsApi
 );
 
-const ingredientsSlice = createSlice({
+export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {},

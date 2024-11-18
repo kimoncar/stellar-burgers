@@ -1,7 +1,6 @@
 import { getOrderByNumberApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { isLoadingOrdersSelector } from './feedSlice';
 
 export interface IFeedState {
   isLoading: boolean;
@@ -9,7 +8,7 @@ export interface IFeedState {
   error: string | null;
 }
 
-const initialState: IFeedState = {
+export const initialState: IFeedState = {
   isLoading: false,
   order: null,
   error: null
